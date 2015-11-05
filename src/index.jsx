@@ -10,55 +10,22 @@ const MAX_MESSAGE_LENGTH = 140;
  * My beautiful app:                                                          *
  ******************************************************************************/
 
-class MessageComposer extends React.Component {
+class SearchBox extends React.Component {
   get empty() {
-    return this.props.message.trim() === '';
-  }
-
-  get tooLong() {
-    return this.messageLength > MAX_MESSAGE_LENGTH;
+    return this.props.searchString.trim() === '';
   }
 
   get submitDisabled() {
-    return this.empty || this.tooLong;
-  }
-
-  get messageLength() {
-    return this.props.message.length;
+    return this.empty;
   }
 
   render() {
     return (
-      <form method="POST" action="#" onSubmit={postMessage}>
-        <ComposeTextArea
-          value={this.props.message}
-          valid={!this.tooLong}
-          onChange={evt => changeMessage(evt.target.value)} />
-        <SubmitButton disabled={this.submitDisabled}> Post </SubmitButton>
-        <MessageCounter messageLength={this.messageLength} />
+      <form method="POST" action="#" onSubmit={doSearch}>
+        <SearchTextInput
+          value={this.props.searchString}
+          onChange={evt => changeSearchString(evt.target.value)} />
       </form>
-    );
-  }
-}
-
-class MessageCounter extends React.Component {
-  get remaining() {
-    return MAX_MESSAGE_LENGTH - this.props.messageLength;
-  }
-
-  get className() {
-    if (this.remaining <= 0) {
-      return 'counter counter-invalid';
-    } else if (this.remaining <= 30) {
-      return 'counter counter-warning';
-    } else {
-      return 'counter';
-    }
-  }
-
-  render() {
-    return (
-      <span className={this.className}>{this.remaining}</span>
     );
   }
 }
@@ -71,24 +38,33 @@ const SubmitButton = ({children, disabled}) => (
   </button>
 );
 
-const ComposeTextArea = (props) => {
-  const className = "form-group" + (props.valid ? '' : ' has-error');
+const SearchTextInput = (props) => (
+  <div className="form-group">
+    <input type="text" placeholder="Search..."
+      className='form-control input-lg' {...props} />
+  </div>
+);
+
+const ReviewList = ({reviews, searchString}) => {
+  let list;
+  const pattern = normalize(searchString.trim());
+
+  if (pattern === '') {
+    list = reviews;
+  } else {
+    list = reviews.filter(({text}) => normalize(text).match(pattern));
+  }
+
   return (
-    <div className={className}>
-      <textarea className='form-control input-lg' rows={3} {...props} />
-    </div>
+    <section className="message-list panel panel-default">
+      <div className="panel-body">
+        {list.map((props, i) => <Review key={props.id} {...props} />)}
+      </div>
+    </section>
   );
 };
 
-const MessageList = ({messages}) => (
-  <section className="message-list panel panel-default">
-    <div className="panel-body">
-      {messages.map((props, i) => <Message key={i} {...props} />)}
-    </div>
-  </section>
-);
-
-const Message = ({text, name, avatarURL}) => (
+const Review = ({text, name, avatarURL}) => (
   <div className="media">
     <div className="media-left">
       <a href="#">
@@ -104,23 +80,52 @@ const Message = ({text, name, avatarURL}) => (
 
 /* Weird global stuff; pretend it doesn't exist. */
 
-let currentMessage = '';
-const messages = [];
+let currentSearchString = '';
+const reviews = [
+  {
+    id: 1,
+    text: "What's with the secret room in Phởbulous?",
+    name: 'Eddie Antonio Santos',
+    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+  },
+  {
+    id: 3,
+    text: "Phởshizzle my nizzle!",
+    name: 'Eddie Antonio Santos',
+    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+  },
+  {
+    id: 2,
+    text: "Noodle feast: #truthinadvertising 🙇",
+    name: 'Eddie Antonio Santos',
+    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+  },
+  {
+    id: 4,
+    text: "Could you stop it with all these phởking puns?",
+    name: 'Eddie Antonio Santos',
+    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+  }
+];
 
-function changeMessage(text) {
-  currentMessage = text;
+function normalize(text) {
+  return text.toLowerCase();
+}
+
+function changeSearchString(text) {
+  currentSearchString = text;
   rerender();
 }
 
-function postMessage(event) {
+function doSearch(event) {
   event.preventDefault();
 
-  messages.push({
-    text: currentMessage,
+  reviews.push({
+    text: currentSearchString,
     name: 'Eddie Antonio Santos',
     avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
   });
-  currentMessage = '';
+  currentSearchString = '';
 
   rerender();
 }
@@ -129,8 +134,8 @@ function rerender() {
   const container = document.getElementById('composer');
   ReactDOM.render(
     <div>
-      <MessageComposer message={currentMessage} />
-      <MessageList messages={Array.from(messages).reverse()} />
+      <SearchBox searchString={currentSearchString} />
+      <ReviewList reviews={reviews} searchString={currentSearchString}/>
     </div>,
     container
   );
