@@ -24,7 +24,7 @@ class MessageComposer extends React.Component {
   }
 
   get messageLength() {
-    return MAX_MESSAGE_LENGTH;
+    return Array.from(this.props.message).length;
   }
 
   render() {
