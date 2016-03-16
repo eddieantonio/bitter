@@ -104,7 +104,7 @@ const reviews = [
 ];
 
 function normalizeForComparison(text) {
-  return text.toLowerCase().normalize('NFD');
+  return text.toLowerCase();
 }
 
 function changeSearchString(text) {
