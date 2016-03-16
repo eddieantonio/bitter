@@ -101,7 +101,7 @@ const reviews = [
 ];
 
 function normalizeForComparison(text) {
-  return text.toLowerCase();
+  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u03ff]/g, '');
 }
 
 function changeSearchString(text) {
