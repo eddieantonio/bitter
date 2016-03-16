@@ -4,8 +4,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const MAX_MESSAGE_LENGTH = 140;
-
 /******************************************************************************
  * My beautiful app:                                                          *
  ******************************************************************************/
@@ -32,12 +30,6 @@ class SearchBox extends React.Component {
 
 /* Bootstrap-ified components. */
 
-const SubmitButton = ({children, disabled}) => (
-  <button disabled={disabled} className="btn btn-primary" type="submit">
-    {children}
-  </button>
-);
-
 const SearchTextInput = (props) => (
   <div className="form-group">
     <input type="text" placeholder="Search..."
@@ -58,7 +50,7 @@ const ReviewList = ({reviews, searchString}) => {
   return (
     <section className="message-list panel panel-default">
       <div className="panel-body">
-        {list.map((props, i) => <Review key={props.id} {...props} />)}
+        {list.map((props) => <Review key={props.id} {...props} />)}
       </div>
     </section>
   );
