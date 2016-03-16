@@ -4,6 +4,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+/* Shim Unicode normalization in Safari. */
+import 'unorm';
+
 /******************************************************************************
  * My beautiful app:                                                          *
  ******************************************************************************/
@@ -101,7 +104,7 @@ const reviews = [
 ];
 
 function normalizeForComparison(text) {
-  return text.toLowerCase();
+  return text.toLowerCase().normalize('NFD');
 }
 
 function changeSearchString(text) {
