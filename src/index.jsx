@@ -47,12 +47,12 @@ const SearchTextInput = (props) => (
 
 const ReviewList = ({reviews, searchString}) => {
   let list;
-  const pattern = normalize(searchString.trim());
+  const pattern = normalizeForComparison(searchString.trim());
 
   if (pattern === '') {
     list = reviews;
   } else {
-    list = reviews.filter(({text}) => normalize(text).match(pattern));
+    list = reviews.filter(({text}) => normalizeForComparison(text).match(pattern));
   }
 
   return (
@@ -108,7 +108,7 @@ const reviews = [
   }
 ];
 
-function normalize(text) {
+function normalizeForComparison(text) {
   return text.toLowerCase();
 }
 
