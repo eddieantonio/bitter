@@ -29,8 +29,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
     "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "unorm": "^1.4.1"
+    "react-dom": "^0.14.2"
   },
   "repository": {
     "type": "git",

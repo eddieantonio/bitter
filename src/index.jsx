@@ -4,9 +4,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-/* Shim Unicode normalization in Safari. */
-import 'unorm';
-
 /******************************************************************************
  * My beautiful app:                                                          *
  ******************************************************************************/
