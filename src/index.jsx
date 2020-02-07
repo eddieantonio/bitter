@@ -72,31 +72,33 @@ const Review = ({text, name, avatarURL}) => (
 
 /* Weird global stuff; pretend it doesn't exist. */
 
+const avatarURL = 'https://pbs.twimg.com/profile_images/911641946505883648/CU7xLOWI_400x400.jpg';
+
 let currentSearchString = '';
 const reviews = [
   {
     id: 1,
     text: "What's with the secret room in Phởbulous?",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 3,
     text: "Phởshizzle my nizzle!",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 2,
     text: "Noodle feast: #truthinadvertising 🙇",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 4,
     text: "Could you stop it with all these phởking puns?",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   }
 ];
 
@@ -115,7 +117,7 @@ function doSearch(event) {
   reviews.push({
     text: currentSearchString,
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   });
   currentSearchString = '';
 
