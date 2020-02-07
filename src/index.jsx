@@ -104,13 +104,17 @@ const Message = ({text, name, avatarURL}) => (
 
 /* Weird global stuff; pretend it doesn't exist. */
 
+const avatarURL = 'https://pbs.twimg.com/profile_images/911641946505883648/CU7xLOWI_400x400.jpg';
+
 let currentMessage = '';
-const messages = [];
+const messages = loadMessagesFromLocalStorage() || [];
+
 
 function changeMessage(text) {
   currentMessage = text;
   rerender();
 }
+
 
 function postMessage(event) {
   event.preventDefault();
@@ -118,11 +122,21 @@ function postMessage(event) {
   messages.push({
     text: currentMessage,
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   });
   currentMessage = '';
 
+  window.sessionStorage.setItem('bitter:messages', JSON.stringify(messages));
+
   rerender();
+}
+
+function loadMessagesFromLocalStorage() {
+  const data = window.sessionStorage.getItem('bitter:messages');
+  if (!data) {
+    return undefined;
+  }
+  return JSON.parse(data);
 }
 
 function rerender() {
