@@ -80,25 +80,25 @@ const reviews = [
     id: 1,
     text: "What's with the secret room in Phởbulous?",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 3,
     text: "Phởshizzle my nizzle!",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 2,
     text: "Noodle feast: #truthinadvertising 🙇",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   },
   {
     id: 4,
     text: "Could you stop it with all these phởking puns?",
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: avatarURL
   }
 ];
 
