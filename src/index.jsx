@@ -115,7 +115,7 @@ function doSearch(event) {
   reviews.push({
     text: currentSearchString,
     name: 'Eddie Antonio Santos',
-    avatarURL: 'https://pbs.twimg.com/profile_images/591750801590091776/NdtsEAu7.jpg'
+    avatarURL: 'https://pbs.twimg.com/profile_images/911641946505883648/CU7xLOWI_400x400.jpg'
   });
   currentSearchString = '';
 
